@@ -36,7 +36,7 @@ define docker::run(
 
   $ports_array = any2array($ports)
   $volumes_array = any2array($volumes)
-  $env_array = any2array($env)
+  $env_array = is_hash($env) ? { true => join_key_to_values($env, '='), default => $env }
   $dns_array = any2array($dns)
   $links_array = any2array($links)
   $lxc_conf_array = any2array($lxc_conf)
