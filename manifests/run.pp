@@ -34,10 +34,12 @@ define docker::run(
   }
   validate_bool($running)
   validate_bool($disable_network)
+  if !is_array($env) and !is_hash($env) {
+    fail("The 'env' parameter must be a hash or array")
+  }
 
   $ports_array = any2array($ports)
   $volumes_array = any2array($volumes)
-  $env_array = is_hash($env) ? { true => join_key_to_values($env, '='), default => $env }
   $dns_array = any2array($dns)
   $links_array = any2array($links)
   $lxc_conf_array = any2array($lxc_conf)
