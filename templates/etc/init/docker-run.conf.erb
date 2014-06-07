@@ -75,6 +75,7 @@ end script
 post-stop script
 if [ -e "/var/run/docker-<%= @name %>.cid" ]; then
   docker kill "$(cat /var/run/docker-<%= @name %>.cid)" && \
+  docker rm "$(cat /var/run/docker-<%= @name %>.cid)" && \
     rm "/var/run/docker-<%= @name %>.cid"
 fi
 end script
